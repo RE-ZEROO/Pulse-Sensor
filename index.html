@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Tech Pico</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="./style.css" type="text/css"/>
+  </head>
+
+  <body onload="getData()">
+    <div class="container">
+      <main>
+        <h1>Pico Sensor Data</h1>
+
+        <div class="cards">
+          <div class="pulse">
+            <div class="top"></div>
+
+            <div class="middle">
+              <div class="left">
+                <span class="material-symbols-outlined">&#xf6e9</span>
+              </div>
+              <div class="right">
+                <h3 id="pulseData">0</h3>
+              </div>
+            </div>
+
+            <div class="bottom">
+              <h2>Pulse</h2>
+            </div>
+          </div>
+
+          <!--------------------------------->
+
+          <div class="oxygen">
+            <div class="top"></div>
+
+            <div class="middle">
+              <div class="left">
+                <span class="material-symbols-outlined">&#xf6db</span>
+              </div>
+              <div class="right">
+                <h3 id="oxygenData">0%</h3>
+              </div>
+            </div>
+
+            <div class="bottom">
+              <h2>Oxygen Concentration</h2>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------->
+
+        <div class="charts">
+          <h1>Pulse & Oxygen History</h1>
+
+          <div class="chart">
+            <div class="pulseChart">
+              <canvas id="pulseChart"></canvas>
+            </div>
+
+            <div class="oxygenChart">
+              <canvas id="oxygenChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="emptyspace">
+          <h1>  </h1>
+        </div>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+    <script>
+      const PicoAddress = window.location.href;
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+
+      const getData = async () => {
+        await delay(3000);
+        //there is a slash at the end of PicoAddress, so don't use "/data". use "data"
+        const data = await fetch(`${PicoAddress}data`);
+        //response is just a string, so use data.text() to decode the Response's body
+        const pulseD = await data.text();
+
+        //pulseData.innerHTML = `${pulseD}p`;
+        document.getElementById('pulseData').innerHTML = pulseD;
+
+        setInterval(getData, 1000)
+      };
+      
+      getData();
+    </script>
+  </body>
+</html>
