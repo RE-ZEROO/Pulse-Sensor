@@ -11,8 +11,8 @@ def connect_wifi():
     wlan = network.WLAN(network.STA_IF)
 
     # define variables
-    wifi_names = ['FRITZ!Box 7590 KW', 'Jans Galaxy S20', '']
-    wifi_passwords = ['68777417935389061540', 'kjla0138', '']
+    wifi_names = ['ssid1', 'ssid2', 'ssid3']
+    wifi_passwords = ['password1', 'password2', 'password3']
 
     #wifi_names = ['wifiname1', 'wifiname2', 'wifiname3']
     #wifi_passwords = ['wifipassword1', 'wifipassword2', 'wifipassword3']
