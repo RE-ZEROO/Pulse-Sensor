@@ -2,7 +2,6 @@
 import network
 import utime as time
 
-#from picoAP import pico_access_point
 from client import Server
 
 def connect_wifi():
